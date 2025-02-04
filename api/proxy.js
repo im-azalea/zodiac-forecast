@@ -12,7 +12,7 @@ export default async function handler(req, res) {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,  // Mengambil API Key dari Environment Variables
+                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,  // API Key dari Environment Variables di Vercel
                 'X-RapidAPI-Host': 'best-daily-astrology-and-horoscope-api.p.rapidapi.com'
             }
         });
