@@ -13,7 +13,6 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       background-color: #f9f9f9;
-      text-align: center;
     }
     .forecast {
       margin-top: 20px;
@@ -22,23 +21,17 @@
       border: 1px solid #eee;
       border-radius: 4px;
     }
-    select, button {
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 16px;
-    }
   </style>
 </head>
 <body>
-
   <h1>Daily Zodiac Forecast</h1>
   <label for="zodiac">Select your zodiac sign:</label>
   <select id="zodiac">
+    <option value="leo">Leo</option>
     <option value="aries">Aries</option>
     <option value="taurus">Taurus</option>
     <option value="gemini">Gemini</option>
     <option value="cancer">Cancer</option>
-    <option value="leo">Leo</option>
     <option value="virgo">Virgo</option>
     <option value="libra">Libra</option>
     <option value="scorpio">Scorpio</option>
@@ -47,7 +40,6 @@
     <option value="aquarius">Aquarius</option>
     <option value="pisces">Pisces</option>
   </select>
-  <br>
   <button id="getForecast">Get Today's Forecast</button>
   
   <div id="result" class="forecast"></div>
@@ -56,24 +48,19 @@
     document.getElementById('getForecast').addEventListener('click', function() {
         const zodiac = document.getElementById('zodiac').value;
         const resultDiv = document.getElementById('result');
-
-        // Ganti URL ini dengan URL proxy di Vercel yang telah Anda buat
-        const apiUrl = `https://zodiac-forecast.vercel.app/api/proxy?sign=${zodiac}&day=today`;
-
         resultDiv.innerHTML = 'Loading...';
 
-        fetch(apiUrl, { method: 'POST' })
+        const apiUrl = `https://zodiac-forecast.vercel.app/api/proxy?zodiacSign=${zodiac}`;
+
+        fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             resultDiv.innerHTML = `
-                <p><strong>Date Range:</strong> ${data.date_range}</p>
-                <p><strong>Current Date:</strong> ${data.current_date}</p>
-                <p><strong>Description:</strong> ${data.description}</p>
-                <p><strong>Compatibility:</strong> ${data.compatibility}</p>
-                <p><strong>Mood:</strong> ${data.mood}</p>
-                <p><strong>Color:</strong> ${data.color}</p>
+                <p><strong>Zodiac:</strong> ${data.zodiacSign}</p>
+                <p><strong>Date:</strong> ${data.date}</p>
+                <p><strong>Horoscope:</strong> ${data.horoscope}</p>
                 <p><strong>Lucky Number:</strong> ${data.lucky_number}</p>
-                <p><strong>Lucky Time:</strong> ${data.lucky_time}</p>
+                <p><strong>Lucky Color:</strong> ${data.lucky_color}</p>
             `;
         })
         .catch(error => {
@@ -82,6 +69,5 @@
         });
     });
   </script>
-
 </body>
 </html>
